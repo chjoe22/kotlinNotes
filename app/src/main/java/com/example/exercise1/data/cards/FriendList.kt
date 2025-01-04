@@ -35,7 +35,7 @@ import com.example.exercise1.data.viewmodel.FriendListViewModel
 @Composable
 fun FriendList(user: User, navController: NavController, viewModel: FriendListViewModel = viewModel()) {
     val userId = user.getId()
-    val isGreen = viewModel.cardColors[userId] == true
+    val isGreen = viewModel.toggledButtons.contains(userId)
     val backgroundColor = if (isGreen) Color.Green else Color.Unspecified
     Card(
         colors = CardDefaults.cardColors(containerColor = backgroundColor),
@@ -66,7 +66,7 @@ fun FriendList(user: User, navController: NavController, viewModel: FriendListVi
             }
             Button(
                 onClick = {
-                    viewModel.toggleCardColor(userId)
+                    viewModel.toggleButton(userId)
                 },
                 modifier = Modifier.padding(8.dp).size(50.dp),
                 contentPadding = PaddingValues(0.dp),

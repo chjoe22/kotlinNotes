@@ -8,7 +8,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,11 +22,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.exercise1.data.viewmodel.TopBarViewModel
 
 @Composable
-fun DetailsScreen(navController: NavController, firstName: String?, lastName: String?, age: Int?, image: Int?){
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+fun DetailsScreen(navController: NavController,
+                  firstName: String?,
+                  lastName: String?,
+                  age: Int?,
+                  image: Int?,
+                  topBarViewModel: TopBarViewModel = viewModel()
+){
+    topBarViewModel.setTitle(firstName + " " + lastName)
+    Scaffold(modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
         Button(
             onClick = { navController.popBackStack() },
             modifier = Modifier.padding(16.dp)

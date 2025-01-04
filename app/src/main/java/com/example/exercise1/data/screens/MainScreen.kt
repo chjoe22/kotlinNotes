@@ -14,16 +14,23 @@ import com.example.exercise1.data.cards.FriendList
 import com.example.exercise1.data.cards.ProfileCard
 import com.example.exercise1.data.user.User
 import com.example.exercise1.data.viewmodel.FriendListViewModel
+import com.example.exercise1.data.viewmodel.TopBarViewModel
 
 @Composable
-fun MainScreen(navController: NavController, user: User, listOfUsers: List<User>, viewModel: FriendListViewModel = viewModel()){
+fun MainScreen(navController: NavController,
+               user: User,
+               listOfUsers: List<User>,
+               friendListViewModel: FriendListViewModel = viewModel(),
+               topBarViewModel: TopBarViewModel = viewModel(),
+               ){
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column {
+            topBarViewModel.setTitle("Main Screen")
             ProfileCard(user, Modifier.padding(innerPadding))
 
             LazyColumn {
                 items(listOfUsers) { user ->
-                    FriendList(user, navController, viewModel)
+                    FriendList(user, navController, friendListViewModel)
                 }
             }
         }
