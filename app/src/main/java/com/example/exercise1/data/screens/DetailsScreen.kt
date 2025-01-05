@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.exercise1.data.user.User
 import com.example.exercise1.data.viewmodel.TopBarViewModel
 
 @Composable
@@ -32,7 +33,8 @@ fun DetailsScreen(navController: NavController,
                   lastName: String?,
                   age: Int?,
                   image: Int?,
-                  topBarViewModel: TopBarViewModel = viewModel()
+                  topBarViewModel: TopBarViewModel = viewModel(),
+                  user: User
 ){
     topBarViewModel.setTitle(firstName + " " + lastName)
     Scaffold(modifier = Modifier.fillMaxSize()
@@ -57,6 +59,7 @@ fun DetailsScreen(navController: NavController,
             Text(text = "First Name: $firstName", style = MaterialTheme.typography.headlineLarge)
             Text(text = "Last Name: $lastName", style = MaterialTheme.typography.headlineLarge)
             Text(text = "Age: $age", style = MaterialTheme.typography.bodyMedium)
+            Text(text = "Everything ${user.firstName} ${user.lastName}, Age: ${user.age}")
         }
     }
 

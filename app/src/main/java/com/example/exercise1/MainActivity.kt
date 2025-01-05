@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold (
                     topBar = { TopBar(viewModel = topBarViewModel) },
-                    bottomBar = { BottomBar(navController) }
+                    bottomBar = { BottomBar(navController, user) }
                 ){ paddingValues ->
                     NavHost(
                         navController = navController,
@@ -91,7 +91,14 @@ class MainActivity : ComponentActivity() {
                             val lastName = backStackEntry.arguments?.getString("lastName")
                             val age = backStackEntry.arguments?.getString("age")?.toInt()
                             val image = backStackEntry.arguments?.getString("image")?.toInt()
-                            DetailsScreen(navController, firstName, lastName, age, image, topBarViewModel = topBarViewModel)
+
+                            // Tried to use this underneath to see if i could just parse user between screens
+                            val redirectUser = image?.let { age?.let { it1 -> User(firstName.toString(), lastName.toString(), it1.toInt(), it.toInt()) } }
+                            redirectUser?.let {
+                                DetailsScreen(navController, firstName, lastName, age, image, topBarViewModel = topBarViewModel,
+                                    it
+                                )
+                            }
                         }
                     }
                 }
